@@ -19,7 +19,7 @@ File: `src/reactapp/package.json`
 ```
 "config": {
     "paymentMethodsRepo": {
-      "paypalExpress": "git@github.com:hyva-themes/magento2-react-checkout-paypal-express.git"
+      "paypalExpress": "git@github.com:Dnd-Safran/hipayExpress.git"
     }
 },
 ```
