@@ -1,5 +1,5 @@
-import PaypalExpress from './src/components/PaypalExpress';
+import HipayExpress from './src/components/HipayExpress';
 
 export default {
-  paypal_express: PaypalExpress,
+  hipay_hosted: HipayExpress,
 };
