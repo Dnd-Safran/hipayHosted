@@ -19,7 +19,7 @@ File: `src/reactapp/package.json`
 ```
 "config": {
     "paymentMethodsRepo": {
-      "paypalExpress": "git@github.com:Dnd-Safran/hipayExpress.git"
+      "hipay_hosted": "git@github.com:Dnd-Safran/hipayExpress.git"
     }
 },
 ```

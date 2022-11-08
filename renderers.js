@@ -1,5 +1,5 @@
-import HipayExpress from './src/components/HipayExpress';
+import HipayHosted from './src/components/HipayHosted';
 
 export default {
-  hipay_hosted: HipayExpress,
+  hipay_hosted: HipayHosted,
 };

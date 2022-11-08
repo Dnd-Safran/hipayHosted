@@ -7,7 +7,7 @@ import usePaymentMethodCartContext from '@hyva/react-checkout/components/payment
 import usePaymentMethodAppContext from '@hyva/react-checkout/components/paymentMethod/hooks/usePaymentMethodAppContext';
 
 
-function HipayExpress({ method, selected, actions }) {
+function HipayHosted({ method, selected, actions }) {
 
   const { registerPaymentAction } = useCheckoutFormContext();
   const { setPaymentMethod, selectedPaymentMethod } = usePaymentMethodCartContext();
@@ -16,16 +16,34 @@ function HipayExpress({ method, selected, actions }) {
   const methodCode = _get(method, 'code');
   const isSelected = methodCode === selected.code;
 
+
+  const [apiURL, setApiURL]= useState(null);
+
+  useEffect( async () => {
+    if(apiURL && isSelected){
+        setPageLoader(true);
+
+        await setPaymentMethod(methodCode);
+
+        setPageLoader(false);
+    }
+  },[apiURL, isSelected])
+
   useEffect(async () => {
     if(isSelected){
         setPageLoader(true);
-        registerPaymentAction(methodCode, () => {
-          console.log('BIM');
-          setPageLoader(true);
-        });
-        await setPaymentMethod(methodCode);
-        setPageLoader(false);
 
+        // add action
+        registerPaymentAction(methodCode, () => {
+            window.location = apiURL;
+        });
+        
+        // build hipay url
+        const url = '"https://stage-secure-gateway.hipay-tpp.com/payment/web/pay/df4d20da-7b6f-4fed-8603-c4ed3dca48';
+        
+        setApiURL(apiURL); // trigger the other useEffect
+
+        setPageLoader(false);
     }
   }, [selected]);
 
@@ -49,14 +67,14 @@ const methodShape = shape({
   code: string.isRequired,
 });
 
-HipayExpress.propTypes = {
+HipayHosted.propTypes = {
   method: methodShape.isRequired,
   selected: methodShape.isRequired,
   actions: shape({ change: func }),
 };
 
-HipayExpress.defaultProps = {
+HipayHosted.defaultProps = {
   actions: null,
 };
 
-export default HipayExpress;
+export default HipayHosted;
